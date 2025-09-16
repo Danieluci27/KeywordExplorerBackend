@@ -1,9 +1,14 @@
 from elasticsearch import Elasticsearch, helpers
 from retrieve_articles import Article
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 URL = "http://localhost:9200"
 
-INDEX = "articles"
+INDEX = os.getenv("ES_INDEX", "articles")
+
 MAPPING = {
     "settings": {"number_of_shards": 1, "number_of_replicas": 0},
     "mappings": {
@@ -16,7 +21,7 @@ MAPPING = {
             "analysis": {
                 "properties": {
                     "claim_coverage": {"type": "float"},
-                    "subjectivity": {"type": "float"},
+                    "subjectivity": {"type": "float"}, 
                     "claims": {"type": "text", "analyzer": "english"},
                     "cluster_id": {"type": "integer"}
                 }
