@@ -1,4 +1,3 @@
 .env
 subj_classify.py
 __pycache__/
-elastic_search.cpython-313.pyc
